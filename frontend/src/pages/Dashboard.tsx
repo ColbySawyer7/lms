@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 
 const Component = () => (
   <Card>
-    <CardHeader title="Welcome to admin" />
+    <CardHeader title="Welcome to the Library Management System (LMS)" />
   </Card>
 );
 

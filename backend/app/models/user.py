@@ -23,5 +23,7 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     )
     items: Mapped["Item"] = relationship(back_populates="user", cascade="all, delete")
 
+    transactions = relationship("Transaction", back_populates="user")
+
     def __repr__(self):
         return f"User(id={self.id!r}, name={self.email!r})"

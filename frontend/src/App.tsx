@@ -4,7 +4,10 @@ import { Admin, fetchUtils, Resource, CustomRoutes } from "react-admin";
 import { Route } from "react-router";
 import MyLayout from "./components/AdminLayout";
 import Dashboard from "./pages/Dashboard";
-import { ItemCreate, ItemEdit, ItemList } from "./pages/Items";
+import { BookCreate, BookEdit, BookList } from "./pages/Books";
+import { LibraryCreate, LibraryEdit, LibraryList } from "./pages/Library";
+import { TransactionEdit, TransactionList } from "./pages/Transactions";
+
 import LoginPage from "./pages/Login";
 import { ProfileEdit } from "./pages/ProfileEdit";
 import Register from "./pages/Register";
@@ -13,6 +16,9 @@ import authProvider from "./providers/authProvider";
 import { basePath } from "./providers/env";
 import PostIcon from "@mui/icons-material/PostAdd";
 import PersonIcon from "@mui/icons-material/Person";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import ReceiptIcon from "@mui/icons-material/Receipt";
 
 const httpClient = (url: string, options: any = {}) => {
   options.user = {
@@ -55,16 +61,34 @@ const App = () => {
             icon={PersonIcon}
           />
         ) : null,
+        permissions.is_superuser === true ? (
+          <Resource
+            options={{ label: "Transactions" }}
+            name="transactions"
+            list={TransactionList}
+            edit={TransactionEdit}
+            icon={ReceiptIcon}
+          />
+        ) : null,
         <Resource
-          name="items"
-          options={{ label: "Items" }}
-          list={ItemList}
-          edit={ItemEdit}
-          create={ItemCreate}
-          icon={PostIcon}
+          name="books"
+          options={{ label: "Books" }}
+          list={BookList}
+          edit={BookEdit}
+          create={BookCreate}
+          icon={MenuBookIcon}
+        />,
+        <Resource
+          name="libraries"
+          options={{ label: "Libraries" }}
+          list={LibraryList}
+          edit={LibraryEdit}
+          create={LibraryCreate}
+          icon={CollectionsIcon}
         />,
       ]}
     </Admin>
+
   );
 };
 

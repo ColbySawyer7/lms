@@ -14,9 +14,23 @@
 
 
 
-export * from './api/auth-api';
-export * from './api/books-api';
-export * from './api/libraries-api';
-export * from './api/transactions-api';
-export * from './api/users-api';
+/**
+ * 
+ * @export
+ * @interface LibraryUpdate
+ */
+export interface LibraryUpdate {
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryUpdate
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryUpdate
+     */
+    'location': string;
+}
 

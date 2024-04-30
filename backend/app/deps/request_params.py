@@ -6,6 +6,9 @@ from sqlalchemy import UnaryExpression, asc, desc
 
 from app.db import Base
 from app.models.item import Item
+from app.models.book import Book
+from app.models.library import Library
+from app.models.transaction import Transaction
 from app.schemas.request_params import RequestParams
 
 
@@ -48,3 +51,6 @@ def parse_react_admin_params(model: Type[Base]) -> Callable:
 
 
 ItemRequestParams = Annotated[RequestParams, Depends(parse_react_admin_params(Item))]
+BookRequestParams = Annotated[RequestParams, Depends(parse_react_admin_params(Book))]
+LibraryRequestParams = Annotated[RequestParams, Depends(parse_react_admin_params(Library))]
+TrasnactionRequestParams = Annotated[RequestParams, Depends(parse_react_admin_params(Transaction))]
