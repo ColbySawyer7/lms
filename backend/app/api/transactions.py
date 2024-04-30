@@ -21,7 +21,18 @@ async def get_transactions(response: Response, session: CurrentAsyncSession, req
     total = await session.scalar(
         select(func.count(Transaction.id))
     )
-    transactions = (await session.execute(select(Transaction))).scalars().all()
+    transactions = (
+        (
+            await session.execute(
+                select(Transaction)
+                .offset(request_params.skip)
+                .limit(request_params.limit)
+                .order_by(request_params.order_by)
+            )
+        )
+        .scalars()
+        .all()
+    )
     response.headers[
         "Content-Range"
     ] = f"{request_params.skip}-{request_params.skip + len(transactions)}/{total}"

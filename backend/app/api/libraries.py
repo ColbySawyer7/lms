@@ -21,7 +21,18 @@ async def get_libraries(response: Response, session: CurrentAsyncSession, reques
     total = await session.scalar(
         select(func.count(Library.id))
     )
-    libraries = (await session.execute(select(Library))).scalars().all()
+    libraries = (
+        (
+            await session.execute(
+                select(Library)
+                .offset(request_params.skip)
+                .limit(request_params.limit)
+                .order_by(request_params.order_by)
+            )
+        )
+        .scalars()
+        .all()
+    )
     response.headers[
         "Content-Range"
     ] = f"{request_params.skip}-{request_params.skip + len(libraries)}/{total}"

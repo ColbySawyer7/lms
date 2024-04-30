@@ -22,7 +22,18 @@ async def get_books(response: Response, session: CurrentAsyncSession, request_pa
     total = await session.scalar(
         select(func.count(Book.id))
     )
-    books = (await session.execute(select(Book))).scalars().all()
+    books = (
+        (
+            await session.execute(
+                select(Book)
+                .offset(request_params.skip)
+                .limit(request_params.limit)
+                .order_by(request_params.order_by)
+            )
+        )
+        .scalars()
+        .all()
+    )
     response.headers[
         "Content-Range"
     ] = f"{request_params.skip}-{request_params.skip + len(books)}/{total}"
