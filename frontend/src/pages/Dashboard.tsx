@@ -12,7 +12,7 @@ const Component = () => {
   const [countBooks, setCountBooks] = useState(0);
   const [countMembers, setCountMembers] = useState(0);
   const [countTransactions, setCountTransactions] = useState(0);
-  const countLoanedBooks = 30;  // This might also be fetched depending on your backend
+  const [countLibraries, setCountLibraries] = useState(0);
   const countOverdueBooks = 5;  // This might also be fetched
 
 
@@ -23,7 +23,15 @@ const Component = () => {
       .then(data => setCountBooks(data));
     } catch (e) {
       console.error(e);
-    }   
+    }
+
+    try{
+      fetch(`${basePath}/api/v1/libraries/count`)
+        .then(response => response.json())
+        .then(data => setCountLibraries(data));
+      } catch (e) {
+        console.error(e);
+      }  
     
     try{
     fetch(`${basePath}/api/v1/transactions/count`)
@@ -54,10 +62,10 @@ const Component = () => {
           <CounterBox label="Total Members" count={countMembers} />
         </Grid>
         <Grid item xs={3}>
-          <CounterBox label="Books Loaned Out" count={30} />
+          <CounterBox label="Available Libraries" count={countLibraries} />
         </Grid>
         <Grid item xs={3}>
-          <CounterBox label="Total Transactions" count={countTransactions} />
+          <CounterBox label="Books Loaned Out" count={countTransactions} />
         </Grid>
       </Grid>
     </CardContent>
