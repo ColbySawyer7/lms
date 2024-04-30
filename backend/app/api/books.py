@@ -11,6 +11,12 @@ from app.schemas.book import Book as BookSchema, BookCreate, BookUpdate
 
 router = APIRouter(prefix="/books")
 
+@router.get("/count")
+async def count_books(response: Response, session: CurrentAsyncSession) -> Any:
+    result = await session.execute(select(func.count(Book.id)))
+    count = result.scalar_one()
+    return count
+
 @router.get("", response_model=List[BookSchema])
 async def get_books(response: Response, session: CurrentAsyncSession, request_params: BookRequestParams) -> Any:
     total = await session.scalar(

@@ -10,6 +10,12 @@ from app.deps.request_params import TrasnactionRequestParams
 
 router = APIRouter(prefix="/transactions")
 
+@router.get("/count")
+async def count_transactions(response: Response, session: CurrentAsyncSession) -> Any:
+    result = await session.execute(select(func.count(Transaction.id)))
+    count = result.scalar_one()
+    return count
+
 @router.get("", response_model=List[TransactionSchema])
 async def get_transactions(response: Response, session: CurrentAsyncSession, request_params: TrasnactionRequestParams) -> Any:
     total = await session.scalar(

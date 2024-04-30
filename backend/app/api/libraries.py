@@ -10,6 +10,12 @@ from app.deps.request_params import LibraryRequestParams
 
 router = APIRouter(prefix="/libraries")
 
+@router.get("/count")
+async def count_libraries(response: Response, session: CurrentAsyncSession) -> Any:
+    result = await session.execute(select(func.count(Library.id)))
+    count = result.scalar_one()
+    return count
+
 @router.get("", response_model=List[LibrarySchema])
 async def get_libraries(response: Response, session: CurrentAsyncSession, request_params: LibraryRequestParams) -> Any:
     total = await session.scalar(

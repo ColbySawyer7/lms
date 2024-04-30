@@ -11,6 +11,11 @@ from app.schemas.user import UserRead
 
 router = APIRouter()
 
+@router.get("/members/count")
+async def count_users(response: Response, session: CurrentAsyncSession) -> Any:
+    result = await session.execute(select(func.count(User.id)))
+    count = result.scalar_one()
+    return count
 
 @router.get("/users", response_model=List[UserRead])
 async def get_users(

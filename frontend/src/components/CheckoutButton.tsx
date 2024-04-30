@@ -9,9 +9,6 @@ interface CheckoutBookProps {
     book: number; 
 }
 
-
-
-
 const BookDetail: React.FC<CheckoutBookProps> = ({ book }) => {
     const notify = useNotify();
     const user = useGetIdentity();
