@@ -6,7 +6,7 @@ from pydantic.networks import AnyHttpUrl
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "lms"
+    PROJECT_NAME: str = "Library Management System"
 
     SENTRY_DSN: Optional[HttpUrl] = None
 
