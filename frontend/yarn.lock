@@ -11118,10 +11118,10 @@ wcwidth@>=1.0.1, wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-web-vitals@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-3.4.0.tgz#45ed33a3a2e029dc38d36547eb5d71d1c7e2552d"
-  integrity sha512-n9fZ5/bG1oeDkyxLWyep0eahrNcPDF6bFqoyispt7xkW0xhDzpUBTgyDKqWDi1twT0MgH4HvvqzpUyh0ZxZV4A==
+web-vitals@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-4.1.1.tgz#6619bd9c41b299c897a42a89c352c5a92fac91d8"
+  integrity sha512-wW3cdBZ56Rc5Az8p1Pw6g1zHU7X8HPLigQjD5Z0ef3EG9SPo4iO7RxsiU87aH3xaaEw0if6Ven2s+zlNGiXYqw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
